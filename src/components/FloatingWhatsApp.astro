@@ -1,0 +1,14 @@
+---
+// Round WhatsApp button that stays in the bottom corner on every page (except contact and thank-you).
+import { t, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+<a href={d.contactInfo.whatsappLink} aria-label={d.contactInfo.floatLabel} title={d.contactInfo.floatLabel}
+  class="fixed end-5 bottom-5 z-30 flex h-14 w-14 items-center justify-center rounded-full border border-gold bg-ink text-gold shadow-[0_12px_30px_rgba(0,0,0,0.5)] transition-colors hover:bg-gold hover:text-ink md:end-8 md:bottom-8">
+  <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.5-4.3A8.5 8.5 0 1 1 20.5 11.6z" />
+    <path d="M9 8.6c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3 0 .5.5.9 1.3 1.7 2.2 2.2.2.1.4.1.5 0l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .4-.2.8-.6 1-.5.3-1.3.4-2.6-.1-2.2-.9-3.9-2.6-4.8-4.8-.4-1.1-.2-1.9.2-2.5z" fill="currentColor" stroke="none" />
+  </svg>
+</a>

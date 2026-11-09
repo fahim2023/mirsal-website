@@ -24,6 +24,7 @@ const h2 = 'm-0 font-display text-[clamp(36px,4.6vw,64px)] leading-[1.08] font-n
         <Eyebrow text={h.kicker} />
         <h1 class="m-0 font-display text-[clamp(46px,6.4vw,96px)] leading-[1.02] font-normal rtl:leading-[1.4] rtl:font-medium">{h.h1}</h1>
         <p class="m-0 max-w-[32em] text-[clamp(17px,1.5vw,19px)] text-muted">{h.text}</p>
+        <p class="m-0 flex items-center gap-3 font-display text-lg text-sand italic rtl:not-italic"><Star size={16} />{h.nameMeaning}</p>
         <div class="flex flex-wrap gap-3.5">
           <Button href={link(lang, 'contact')}>{h.cta1}</Button>
           <Button href="#experience" variant="ghost">{h.cta2}</Button>
@@ -127,6 +128,7 @@ const h2 = 'm-0 font-display text-[clamp(36px,4.6vw,64px)] leading-[1.08] font-n
       <Button href={link(lang, 'contact')}>{h.cta1}</Button>
       <a href={link(lang, 'engagement')} class="self-center text-sm text-muted">{h.engagement.more}</a>
     </div>
+    <p class="m-0 mx-auto max-w-[40em] border border-gold/50 px-5 py-3.5 text-center text-[15px] text-sand">{h.engagement.founding}</p>
     <p class="m-0 text-center text-sm text-muted">{h.engagement.note}</p>
   </Section>
 

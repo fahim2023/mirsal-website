@@ -5,8 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://docs.astro.build/en/reference/configuration-reference/
 export default defineConfig({
-  // Change this to your real domain before launch (used for the sitemap and SEO tags).
-  site: 'https://www.mirsal.example',
+  // The site's address (used for the sitemap, SEO tags and link previews). Change it if you get your own domain.
+  site: 'https://mirsal-automate.netlify.app',
 
   // Two languages: English at "/", Arabic at "/ar/".
   i18n: {
