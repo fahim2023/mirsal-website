@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const p = t(lang).process;
 const num = (i: number) => (lang === 'ar' ? ['٠١', '٠٢', '٠٣', '٠٤', '٠٥', '٠٦'][i] : String(i + 1).padStart(2, '0'));
 ---
-<Base lang={lang} page="process" title={p.title}>
+<Base lang={lang} page="process" title={p.title} description={p.description}>
   <PageHero eyebrow={p.eyebrow} title={p.h1} text={p.text} />
 
   <!-- Timeline -->

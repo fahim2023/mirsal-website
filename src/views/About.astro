@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const a = t(lang).about;
 const numerals = lang === 'ar' ? ['١', '٢', '٣'] : ['I', 'II', 'III'];
 ---
-<Base lang={lang} page="about" title={a.title}>
+<Base lang={lang} page="about" title={a.title} description={a.description}>
   <PageHero eyebrow={a.eyebrow} title={a.h1} text={a.text} />
 
   <Section>

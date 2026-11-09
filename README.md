@@ -80,13 +80,12 @@ To change a colour everywhere, edit it once in `src/styles/global.css` under `@t
 
 ## Things to fill in before launch
 
-Search the project for `[` to find every placeholder:
-
-- **Prices**: `[SAR 0,000]` in `en.ts` / `[٠٬٠٠٠ ريال]` in `ar.ts`
-- **Contact details**: `contactInfo` near the top of both language files
-- **Partner name**, your founder quote on the About page
-- **Domain**: `site:` in `astro.config.mjs` (used for SEO and the sitemap)
-- **Privacy policy**: fill the brackets and have it reviewed
+- **WhatsApp number**: `contactInfo` near the top of `en.ts` and `ar.ts` (currently a dummy `+966 00 000 0000`)
+- **Email**: `contactInfo.email` in both files. Leave it `''` until you have one: the footer and
+  contact page then hide the email links. When you add it, also mention it in the privacy policy.
+- **Domain**: `site:` in `astro.config.mjs` (currently the free Netlify address)
+- **Partner name**, your founder photo on the Home and About pages
+- **Privacy policy**: have it reviewed before launch
 
 ### Photos
 
@@ -110,13 +109,13 @@ The founder sections currently show an architectural photo (`arches`).
 4. In n8n, add a Google Sheets node (save the lead) and a WhatsApp/Telegram/email node (alert you).
 
 Without an endpoint the form simply goes to the thank-you page, which is handy while developing.
-On Cloudflare Pages, set the same variable under *Settings → Environment variables*.
+On Netlify, set the same variable under *Site configuration → Environment variables*.
 
-## Put it online (free) with Cloudflare Pages
+## Put it online (free) with Netlify
 
 1. Create a GitHub repository and push this folder to it.
-2. In Cloudflare: *Workers & Pages → Create → Pages → Connect to Git*, pick the repository.
-3. Framework preset **Astro**, build command `npm run build`, output folder `dist`.
-4. Add your domain under *Custom domains*.
+2. In Netlify: *Add new site → Import an existing project*, pick the repository.
+3. Build command `npm run build`, publish directory `dist`.
+4. Later, add your own domain under *Domain management* and update `site:` in `astro.config.mjs`.
 
 Every time you push to GitHub, the site rebuilds automatically.

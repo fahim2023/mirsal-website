@@ -12,7 +12,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const e = t(lang).engagement;
 ---
-<Base lang={lang} page="engagement" title={e.title}>
+<Base lang={lang} page="engagement" title={e.title} description={e.description}>
   <PageHero eyebrow={e.eyebrow} title={e.h1} text={e.text} />
 
   <!-- Tiers -->

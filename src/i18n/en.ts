@@ -33,7 +33,8 @@ export const en = {
   },
 
   contactInfo: {
-    email: 'hello@mirsal.example',
+    // Leave empty until you have an email address: the site then hides every email link.
+    email: '',
     whatsappLabel: 'WhatsApp',
     whatsappNumber: '+966 00 000 0000',
     whatsappLink: 'https://wa.me/966000000000',
@@ -133,7 +134,10 @@ export const en = {
         { q: 'Will my agents need to change anything?', a: 'No. They keep using WhatsApp. Serious clients simply arrive already answered, with a summary.' },
         { q: 'Does it really reply in Arabic?', a: 'Yes, in the language the client writes in. Every template is reviewed by a native speaker before going live.' },
         { q: 'Who owns the data?', a: 'You do. Leads live in your own CRM and accounts. We only access them to run and maintain the system.' },
-        { q: 'Can I try it first?', a: 'On the call we set up a demonstration using one of your real listings, so you see exactly what a client would see.' },
+        { q: 'How does it know about my listings?', a: 'We connect it to your listings through a portal feed, your CRM or a simple spreadsheet. When a listing changes or sells, the replies change with it.' },
+        { q: 'What if a client asks something it cannot answer?', a: 'It passes the conversation straight to the right agent with a short summary, and lets the client know a colleague will reply shortly. No client is left at a dead end.' },
+        { q: 'Is this an AI chatbot?', a: 'Not in the usual sense. The core conversation follows scripts you approve, so nothing unexpected is ever said in your agency’s name. Optional AI can answer open questions, limited to your own listings and information, and any agent can take over at any time.' },
+        { q: 'Can I try it first?', a: 'Yes. After a short first call, we build a private demonstration on one of your real listings, so you see exactly what your clients would see before you commit to anything.' },
         { q: 'What if I want to cancel?', a: 'After the first three months, cancel the monthly plan with 30 days’ notice. Your number, data and CRM stay yours.' },
       ],
     },
@@ -147,6 +151,7 @@ export const en = {
 
   services: {
     title: 'The system · Mirsal',
+    description: 'How Mirsal works: every property enquiry captured, answered on WhatsApp within seconds in Arabic or English, qualified, saved to your CRM and booked into real calendars.',
     eyebrow: 'The system',
     h1: 'Six parts, working as one.',
     text: 'Mirsal is not a chatbot. It is a complete concierge for your enquiries, from the first message to the viewing and beyond, built on WhatsApp and your own CRM.',
@@ -205,11 +210,12 @@ export const en = {
 
   process: {
     title: 'Process · Mirsal',
+    description: 'From first call to first booked viewing in about three weeks: what happens each week, what we need from you, and the standards we work to.',
     eyebrow: 'Process',
     h1: 'From first conversation to first booked viewing in about three weeks.',
     text: 'A calm, well-defined engagement. You will always know what happens next, and what we need from you.',
     stages: [
-      { w: 'Week 0', t: 'Private consultation', d: 'A 20-minute call about your listings, lead sources, team and tools. We show you a demonstration built on one of your own properties.' },
+      { w: 'Week 0', t: 'Private consultation', d: 'A 20-minute call about your listings, lead sources, team and tools. Afterwards we show you a private demonstration built on one of your own properties.' },
       { w: 'Week 1', t: 'Design', d: 'We write your conversation scripts in your agency’s voice, in Arabic and English. Every Arabic message is reviewed by a native speaker. Nothing goes live without your approval.' },
       { w: 'Weeks 1–3', t: 'Build &amp; connect', d: 'We connect your lead sources, WhatsApp Business number, CRM and agents’ calendars, and test every path a client could take. Meta’s business verification is usually the slowest step, and we handle it with you.' },
       { w: 'Weeks 2–3', t: 'Launch &amp; training', d: 'A short session with your agents: how leads arrive, how to take over a chat, how to read the weekly report.' },
@@ -237,6 +243,7 @@ export const en = {
 
   sectors: {
     title: 'Sectors · Mirsal',
+    description: 'Mirsal is built for real estate agencies first, and also serves car showrooms and seasonal retailers whose customers start on WhatsApp.',
     eyebrow: 'Sectors',
     h1: 'Wherever a sale begins with a message.',
     text: 'Mirsal was designed for real estate, and the same craft serves any business whose clients prefer to start on WhatsApp.',
@@ -266,6 +273,7 @@ export const en = {
 
   engagement: {
     title: 'Engagement · Mirsal',
+    description: 'Mirsal pricing: from SAR 4,500 setup and SAR 750 a month. WhatsApp and CRM costs are billed to you directly, at cost, with no hidden mark-ups.',
     eyebrow: 'Engagement',
     h1: 'A clear investment, quoted plainly.',
     text: 'A one-off setup, then a single monthly fee for hosting, care and improvement. Third-party running costs are billed to you directly, at cost.',
@@ -295,11 +303,12 @@ export const en = {
       { t: 'CRM subscription', d: 'HubSpot, Zoho or similar, if you use one. Google Sheets is free.' },
       { t: 'AI usage, if enabled', d: 'A few halalas per reply, at cost, with no mark-up.' },
     ],
-    terms: 'Minimum term: 3 months. Cancel afterwards with 30 days’ notice. Prices exclude VAT.',
+    terms: 'Minimum term: 3 months. Cancel afterwards with 30 days’ notice. Prices exclude VAT. UAE agencies can be quoted in AED.',
   },
 
   about: {
     title: 'About · Mirsal',
+    description: 'Mirsal is a small, hands-on team: systems built in the UK, every Arabic message written or reviewed by a native speaker in Riyadh.',
     eyebrow: 'About',
     h1: 'The messenger, reimagined.',
     text: 'In Khaleeji poetry and song, the mirsal is the trusted messenger who carries words between people with care. We built Mirsal to do the same for your clients.',
@@ -323,6 +332,7 @@ export const en = {
 
   contact: {
     title: 'Book a demo · Mirsal',
+    description: 'Book a private 20-minute consultation and see how Mirsal would answer your clients on WhatsApp, using one of your own listings.',
     eyebrow: 'Private consultation',
     h1: 'Let us show you how your clients will be received.',
     text: 'Share a few details and we will arrange a 20-minute call at a time that suits you, in Arabic or English.',
@@ -363,18 +373,19 @@ export const en = {
 
   privacy: {
     title: 'Privacy policy · Mirsal',
+    description: 'How Mirsal collects, uses and protects personal data, and how to exercise your rights under UK, Saudi and UAE law.',
     eyebrow: 'Legal',
     h1: 'Privacy policy',
     updated: 'Last updated: November 2026',
     note: 'Draft: this policy will be reviewed by a qualified adviser for the UK, Saudi Arabia and the UAE before Mirsal launches.',
     sections: [
-      { t: 'Who we are', d: 'Mirsal is run by Fahim Adam, based in the United Kingdom. Contact: privacy@mirsal.example.' },
+      { t: 'Who we are', d: 'Mirsal is run by Fahim Adam, based in the United Kingdom. Contact us through the form on this website or on WhatsApp.' },
       { t: 'What we collect', d: 'Details you give us through this website or WhatsApp: name, agency, role, city, phone, email and your message. When we run a system for your agency, we process your clients’ enquiries on your behalf.' },
       { t: 'How we use it', d: 'To respond to your request, provide and support our services, and send service messages. We do not sell personal data or use it for unrelated marketing.' },
       { t: 'Client data we process for agencies', d: 'For enquiries handled by a Mirsal system, your agency is the controller and Mirsal acts as processor under a written agreement. Data is stored in your own CRM and accounts.' },
       { t: 'Where data is stored', d: 'This website is hosted by Netlify. Each agency’s system runs on a dedicated server in a region agreed with that agency. Where data moves between the UK, Saudi Arabia and the UAE, we apply the safeguards required by applicable law.' },
       { t: 'How long we keep it', d: 'Enquiries that do not become clients: 12 months. Client records: for the engagement plus 24 months, unless the law requires longer.' },
-      { t: 'Your rights', d: 'Depending on where you live, including under the UK GDPR, the Saudi Personal Data Protection Law and the UAE Personal Data Protection Law, you may request access, correction, deletion or restriction of your data, and withdraw consent. Write to privacy@mirsal.example.' },
+      { t: 'Your rights', d: 'Depending on where you live, including under the UK GDPR, the Saudi Personal Data Protection Law and the UAE Personal Data Protection Law, you may request access, correction, deletion or restriction of your data, and withdraw consent. Contact us through the form on this website or on WhatsApp.' },
       { t: 'Cookies', d: 'This website uses no tracking or advertising cookies.' },
       { t: 'Changes', d: 'We will post any changes on this page with a new date.' },
     ],

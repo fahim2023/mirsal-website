@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
         <Logo lang={lang} size={22} />
         <p class="m-0 text-[15px] text-muted">{d.footer.line}</p>
         <div class="flex flex-col gap-1 text-[15px]">
-          <a href={`mailto:${d.contactInfo.email}`}>{d.contactInfo.email}</a>
+          {d.contactInfo.email && <a href={`mailto:${d.contactInfo.email}`}>{d.contactInfo.email}</a>}
           <a href={d.contactInfo.whatsappLink}>{d.contactInfo.whatsappLabel} · <span dir="ltr">{d.contactInfo.whatsappNumber}</span></a>
         </div>
       </div>
