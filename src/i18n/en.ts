@@ -87,7 +87,7 @@ export const en = {
       text: 'No new app to learn. Your team keeps using WhatsApp and your CRM. Mirsal does the repetitive part in between.',
       image: 'Photography · interior, marble &amp; light',
       items: [
-        { t: 'Arabic and English', d: 'Replies match the client’s language. Every Arabic message is checked by a native speaker before launch.' },
+        { t: 'Arabic and English', d: 'Replies match the client’s language. Arabic messages are written in your agency’s own voice and approved by your team before launch.' },
         { t: 'Replies at any hour', d: 'Nights, weekends and Fridays.' },
         { t: 'Lead scoring', d: 'Hot, warm or cold, so agents call the right people first.' },
         { t: 'CRM sync', d: 'HubSpot, Zoho or a simple Google Sheet. Your account, your data.' },
@@ -119,7 +119,7 @@ export const en = {
     founder: {
       eyebrow: 'The founder',
       quote:
-        'I’m Fahim, a software developer based in the UK. I build the systems, and my partner in Riyadh, a native Arabic speaker, reviews every Arabic message so it sounds like your agency, not a translation.',
+        'I’m Fahim, a software developer based in the UK. I build every system myself. Arabic messages are written in your agency’s own voice and approved by your team before launch, so they sound like your agency, not a translation.',
       text: 'We keep the client list small on purpose. Each setup is built for one agency’s listings, team and way of working, and we look after it every month after launch.',
       name: 'Fahim Adam',
       role: 'Founder',
@@ -132,7 +132,7 @@ export const en = {
       items: [
         { q: 'Do I need the WhatsApp Business API?', a: 'For full automation, yes. We set it up on your business number and handle Meta verification and message templates with you.' },
         { q: 'Will my agents need to change anything?', a: 'No. They keep using WhatsApp. Serious clients simply arrive already answered, with a summary.' },
-        { q: 'Does it really reply in Arabic?', a: 'Yes, in the language the client writes in. Every template is reviewed by a native speaker before going live.' },
+        { q: 'Does it really reply in Arabic?', a: 'Yes, in the language the client writes in. Arabic messages are written in your agency’s own voice and approved by your team before launch.' },
         { q: 'Who owns the data?', a: 'You do. Leads live in your own CRM and accounts. We only access them to run and maintain the system.' },
         { q: 'How does it know about my listings?', a: 'We connect it to your listings through a portal feed, your CRM or a simple spreadsheet. When a listing changes or sells, the replies change with it.' },
         { q: 'What if a client asks something it cannot answer?', a: 'It passes the conversation straight to the right agent with a short summary, and lets the client know a colleague will reply shortly. No client is left at a dead end.' },
@@ -165,7 +165,7 @@ export const en = {
       {
         name: 'Reply', title: 'A gracious first reply, within seconds.',
         text: 'Sent from your own business number, in the language the client wrote in, about the exact property they asked for.',
-        bullets: ['Arabic and English, checked by a native speaker', 'Photos, floor plan and price attached', 'Your agency’s tone of voice, not a robot’s', 'Replies at night, at weekends and on Fridays'],
+        bullets: ['Arabic in your agency’s voice, approved by your team', 'Photos, floor plan and price attached', 'Your agency’s tone of voice, not a robot’s', 'Replies at night, at weekends and on Fridays'],
         visual: 'reply',
       },
       {
@@ -216,7 +216,7 @@ export const en = {
     text: 'A calm, well-defined engagement. You will always know what happens next, and what we need from you.',
     stages: [
       { w: 'Week 0', t: 'Private consultation', d: 'A 20-minute call about your listings, lead sources, team and tools. Afterwards we show you a private demonstration built on one of your own properties.' },
-      { w: 'Week 1', t: 'Design', d: 'We write your conversation scripts in your agency’s voice, in Arabic and English. Every Arabic message is reviewed by a native speaker. Nothing goes live without your approval.' },
+      { w: 'Week 1', t: 'Design', d: 'We write your conversation scripts in your agency’s own voice, in Arabic and English, and your team approves every message before launch. Nothing goes live without your approval.' },
       { w: 'Weeks 1–3', t: 'Build &amp; connect', d: 'We connect your lead sources, WhatsApp Business number, CRM and agents’ calendars, and test every path a client could take. Meta’s business verification is usually the slowest step, and we handle it with you.' },
       { w: 'Weeks 2–3', t: 'Launch &amp; training', d: 'A short session with your agents: how leads arrive, how to take over a chat, how to read the weekly report.' },
       { w: 'Ongoing', t: 'Care', d: 'Hosting, monitoring, adjustments for new listings and seasons, and a monthly review of what is working.' },
@@ -236,7 +236,7 @@ export const en = {
     standards: [
       { t: 'Your data stays yours', d: 'Leads live in your own CRM and accounts. We access them only to run the system.' },
       { t: 'Nothing sent without approval', d: 'You sign off every message template before launch.' },
-      { t: 'Native Arabic', d: 'Every Arabic message is written or reviewed by a native speaker.' },
+      { t: 'Arabic in your voice', d: 'Arabic messages are written in your agency’s own voice and approved by your team before launch.' },
       { t: 'No lock-in', d: 'After three months, cancel with 30 days’ notice. Your number, data and CRM remain yours.' },
     ],
   },
@@ -292,7 +292,7 @@ export const en = {
     ],
     button: 'Book a demo',
     setupTitle: 'The setup includes',
-    setup: ['Consultation and demonstration', 'Conversation design in Arabic and English', 'Native Arabic review', 'Connection of lead sources, WhatsApp, CRM and calendars', 'Testing and agent training'],
+    setup: ['Consultation and demonstration', 'Conversation design in Arabic and English', 'Approval of every Arabic message by your team', 'Connection of lead sources, WhatsApp, CRM and calendars', 'Testing and agent training'],
     monthlyTitle: 'Each month includes',
     monthlyItems: ['Hosting and monitoring', 'Adjustments for new listings and seasons', 'Weekly performance report', 'Monthly review call', 'Priority support on WhatsApp'],
     paidEyebrow: 'Paid directly by you',
@@ -308,13 +308,13 @@ export const en = {
 
   about: {
     title: 'About · Mirsal',
-    description: 'Mirsal is a small, hands-on team: systems built in the UK, every Arabic message written or reviewed by a native speaker in Riyadh.',
+    description: 'Mirsal is a small, hands-on practice run remotely from the UK on Gulf time. Arabic messages are written in each agency’s own voice and approved by its team before launch.',
     eyebrow: 'About',
     h1: 'The messenger, reimagined.',
     text: 'In Khaleeji poetry and song, the mirsal is the trusted messenger who carries words between people with care. We built Mirsal to do the same for your clients.',
     founderEyebrow: 'The founder',
     quote: '“I kept seeing serious buyers go to another agency for one simple reason: nobody replied in time.”',
-    p1: 'I’m Fahim Adam, a software developer based in the United Kingdom. I design and build every Mirsal system. My partner in Riyadh, a native Arabic speaker, writes and reviews every Arabic conversation, so your clients hear your agency, not a translation.',
+    p1: 'I’m Fahim Adam, a software developer based in the United Kingdom. I design and build every Mirsal system. Arabic conversations are written in your agency’s own voice and approved by your team before launch, so your clients hear your agency, not a translation.',
     p2: 'We keep our client list small by design. Each agency receives a system built around its own listings, team and way of working, and we look after it personally every month.',
     name: 'Fahim Adam',
     role: 'Founder',
@@ -326,8 +326,8 @@ export const en = {
       { t: 'Speed with grace', d: 'Fast replies matter, but never at the expense of courtesy.' },
       { t: 'Craft', d: 'Every agency gets its own scripts, its own voice and a system built around its team.' },
     ],
-    bridgeTitle: 'Between London and Riyadh.',
-    bridgeText: 'Engineering in the UK, language and relationships in the Gulf. We work in your time zone, meet over video or in person when we visit, and answer on WhatsApp like everyone else here.',
+    bridgeTitle: 'From the UK, on Gulf time.',
+    bridgeText: 'I work remotely from the United Kingdom and keep Gulf working hours, so I am available when your team is. We meet over video, and I answer on WhatsApp like everyone else here.',
   },
 
   contact: {
