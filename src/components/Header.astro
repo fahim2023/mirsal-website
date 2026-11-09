@@ -1,0 +1,48 @@
+---
+import Logo from './Logo.astro';
+import { t, link, other, type Lang, type Page } from '../i18n';
+interface Props { lang: Lang; page: Page }
+const { lang, page } = Astro.props;
+const d = t(lang);
+const items: { page: Page; label: string }[] = [
+  { page: 'services', label: d.nav.services },
+  { page: 'process', label: d.nav.process },
+  { page: 'sectors', label: d.nav.sectors },
+  { page: 'engagement', label: d.nav.engagement },
+  { page: 'about', label: d.nav.about },
+];
+const otherLang = other(lang);
+// Pages without their own nav item still switch language to the same page.
+const switchHref = link(otherLang, page);
+---
+<header class="sticky top-0 z-20 border-b border-line bg-ink/90 backdrop-blur-md">
+  <nav aria-label={d.nav.mainMenu} class="mx-auto flex max-w-[1280px] items-center justify-between gap-6 px-5 py-3.5 sm:px-10 lg:px-16">
+    <a href={link(lang, '')} aria-label={d.nav.home} class="no-underline"><Logo lang={lang} /></a>
+
+    <!-- Desktop menu -->
+    <div class="hidden items-center gap-7 lg:flex">
+      {items.map((i) => (
+        <a href={link(lang, i.page)} aria-current={page === i.page ? 'page' : undefined}
+          class:list={['caps py-2.5 text-xs no-underline rtl:text-[15px]', page === i.page ? 'border-b border-gold text-gold' : 'text-muted']}>{i.label}</a>
+      ))}
+      <a href={switchHref} lang={otherLang} hreflang={otherLang} class="py-2.5 text-sm text-muted no-underline">{d.nav.switchLabel}</a>
+      <a href={link(lang, 'contact')} class="caps inline-flex min-h-11 items-center border border-gold px-5 py-2.5 text-xs font-semibold text-gold no-underline hover:bg-gold hover:text-ink rtl:text-sm">{d.nav.book}</a>
+    </div>
+
+    <!-- Mobile menu: a native <details> element, so it works without JavaScript -->
+    <details class="group relative lg:hidden">
+      <summary class="caps flex min-h-11 cursor-pointer list-none items-center gap-2 border border-line-strong px-4 text-xs text-cream [&::-webkit-details-marker]:hidden rtl:text-sm">
+        {d.nav.openMenu}
+        <span aria-hidden="true" class="transition-transform group-open:rotate-45">+</span>
+      </summary>
+      <div class="absolute end-0 top-full mt-2 flex w-64 flex-col border border-line-strong bg-panel p-2 shadow-2xl">
+        {items.map((i) => (
+          <a href={link(lang, i.page)} aria-current={page === i.page ? 'page' : undefined}
+            class:list={['px-3 py-3 no-underline', page === i.page ? 'text-gold' : 'text-cream']}>{i.label}</a>
+        ))}
+        <a href={switchHref} lang={otherLang} hreflang={otherLang} class="px-3 py-3 text-muted no-underline">{d.nav.switchLabel}</a>
+        <a href={link(lang, 'contact')} class="mt-1 bg-gold px-3 py-3 text-center font-semibold text-ink no-underline">{d.nav.book}</a>
+      </div>
+    </details>
+  </nav>
+</header>

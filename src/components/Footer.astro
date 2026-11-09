@@ -1,0 +1,40 @@
+---
+import Logo from './Logo.astro';
+import Star from './Star.astro';
+import { t, link, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const cols = [
+  { title: d.footer.company, links: [[link(lang, 'about'), d.nav.about], [link(lang, 'process'), d.nav.process], [link(lang, 'engagement'), d.nav.engagement]] },
+  { title: d.footer.servicesTitle, links: [[link(lang, 'services'), d.footer.system], [link(lang, 'sectors'), d.nav.sectors], [link(lang, 'contact'), d.nav.book]] },
+  { title: d.footer.legal, links: [[link(lang, 'privacy'), d.footer.privacy]] },
+];
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-line px-5 pt-16 pb-8 sm:px-10 lg:px-16">
+  <div class="mx-auto flex max-w-[1280px] flex-col gap-12">
+    <div class="flex flex-wrap justify-between gap-10">
+      <div class="flex max-w-[380px] flex-[1_1_300px] flex-col gap-4.5">
+        <Logo lang={lang} size={22} />
+        <p class="m-0 text-[15px] text-muted">{d.footer.line}</p>
+        <div class="flex flex-col gap-1 text-[15px]">
+          <a href={`mailto:${d.contactInfo.email}`}>{d.contactInfo.email}</a>
+          <a href={d.contactInfo.whatsappLink}>{d.contactInfo.whatsappLabel} · <span dir="ltr">{d.contactInfo.whatsappNumber}</span></a>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-x-16 gap-y-10">
+        {cols.map((c) => (
+          <div class="flex min-w-[140px] flex-col gap-2.5">
+            <span class="caps text-[11px] text-gold rtl:text-sm">{c.title}</span>
+            {c.links.map(([href, label]) => <a href={href} class="py-0.5 text-[15px] text-muted no-underline">{label}</a>)}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5.5 text-[13px] text-muted">
+      <span class="flex items-center gap-3"><Star size={16} />© {year} {d.meta.siteName}. {d.footer.rights}</span>
+      <span>{d.footer.cities}</span>
+    </div>
+  </div>
+</footer>

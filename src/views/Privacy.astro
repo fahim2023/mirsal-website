@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const p = t(lang).privacy;
+---
+<Base lang={lang} page="privacy" title={p.title}>
+  <section class="px-5 py-20 sm:px-10 md:py-30 lg:px-16">
+    <div class="mx-auto flex max-w-[820px] flex-col gap-7">
+      <Eyebrow text={p.eyebrow} />
+      <h1 class="m-0 font-display text-[clamp(44px,5vw,72px)] leading-[1.08] font-normal rtl:leading-[1.45] rtl:font-medium">{p.h1}</h1>
+      <p class="m-0 text-muted">{p.updated}</p>
+      <div role="note" class="border border-gold px-5 py-4 text-[15px] text-sand">{p.note}</div>
+      {p.sections.map((s, i) => (
+        <section class="flex flex-col gap-2.5 border-t border-line pt-6">
+          <h2 class="m-0 font-display text-[28px] font-normal rtl:font-medium">{lang === 'ar' ? `${(i + 1).toLocaleString('ar-EG')}. ` : `${i + 1}. `}{s.t}</h2>
+          <p class="m-0 text-muted">{s.d}</p>
+        </section>
+      ))}
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,61 @@
+/*
+  Global styles + Tailwind theme.
+  Tailwind v4 is configured here in CSS (no tailwind.config.js needed).
+  Every token below becomes a utility class, e.g. --color-gold -> bg-gold, text-gold, border-gold.
+*/
+@import "tailwindcss";
+
+/* Self-hosted fonts (no requests to Google). */
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/el-messiri/500.css";
+@import "@fontsource/el-messiri/600.css";
+@import "@fontsource/ibm-plex-sans-arabic/400.css";
+@import "@fontsource/ibm-plex-sans-arabic/500.css";
+@import "@fontsource/ibm-plex-sans-arabic/600.css";
+
+@theme {
+  /* Brand colours */
+  --color-ink: #0d0c0a;        /* page background */
+  --color-panel: #15130f;      /* raised panels */
+  --color-cream: #f2ebdd;      /* main text */
+  --color-muted: #b3a992;      /* secondary text */
+  --color-gold: #c8a15a;       /* accent */
+  --color-sand: #e7dcc6;       /* light accent text */
+  --color-line: rgb(200 161 90 / 0.22);        /* hairlines */
+  --color-line-strong: rgb(200 161 90 / 0.45); /* stronger borders */
+
+  /* Fonts. English defaults; Arabic overrides are set on html[lang="ar"] below. */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Manrope", "IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+
+/* Arabic pages swap the font families automatically. */
+html[lang="ar"] {
+  --font-display: "El Messiri", "IBM Plex Sans Arabic", serif;
+  --font-sans: "IBM Plex Sans Arabic", "Manrope", system-ui, sans-serif;
+}
+
+/* Spaced-out small capitals for labels. Arabic has no capitals, so it is switched off there. */
+@utility caps {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+html[lang="ar"] .caps {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@layer base {
+  html { background: var(--color-ink); color: var(--color-cream); scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  html[lang="ar"] body { line-height: 1.85; }
+  a:hover { color: var(--color-gold); }
+  :focus-visible { outline: 1px solid var(--color-gold); outline-offset: 4px; }
+  ::placeholder { color: #8c846f; }
+  ::selection { background: var(--color-gold); color: var(--color-ink); }
+}

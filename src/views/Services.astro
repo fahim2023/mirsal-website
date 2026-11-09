@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Bullets from '../components/Bullets.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const s = d.services;
+const v = s.visuals;
+const numerals = lang === 'ar' ? ['١', '٢', '٣', '٤', '٥', '٦'] : ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const bars = [80, 56, 40, 26];
+---
+<Base lang={lang} page="services" title={s.title}>
+  <PageHero eyebrow={s.eyebrow} title={s.h1} text={s.text} />
+
+  <section class="px-5 pb-20 sm:px-10 md:pb-28 lg:px-16">
+    <div class="mx-auto max-w-[1180px]">
+      {s.modules.map((m, i) => (
+        <div class:list={['flex flex-wrap items-center gap-x-18 gap-y-10 border-t border-line py-14', i % 2 === 1 && 'flex-row-reverse']}>
+          <div class="flex flex-[1_1_420px] flex-col gap-4.5">
+            <div class="flex items-baseline gap-4">
+              <span class="font-display text-[44px] leading-none text-gold">{numerals[i]}</span>
+              <span class="caps text-xs text-muted rtl:text-sm" set:html={m.name} />
+            </div>
+            <h2 class="m-0 font-display text-[clamp(30px,3.2vw,44px)] leading-[1.1] font-normal rtl:leading-[1.45] rtl:font-medium">{m.title}</h2>
+            <p class="m-0 text-[17px] text-muted">{m.text}</p>
+            <Bullets items={m.bullets} />
+          </div>
+
+          <!-- Illustration panel for each module -->
+          <div class="flex w-full max-w-[480px] flex-[1_1_360px] flex-col gap-3 border border-line-strong bg-panel p-6.5">
+            <span class="caps text-[11px] text-gold rtl:text-sm" set:html={m.name} />
+
+            {m.visual === 'sources' && (
+              <div>{v.sources.map(([a, b]) => (
+                <div class="flex justify-between gap-3 border-t border-line py-2.5 text-sm"><span>{a}</span><span class="text-[13px] text-muted">{b}</span></div>
+              ))}</div>
+            )}
+
+            {m.visual === 'reply' && (
+              <div class="flex flex-col gap-2 text-sm">
+                <span class="max-w-[80%] self-end bg-[#2A241A] px-3 py-2">{v.replyClient}</span>
+                <span class="max-w-[86%] self-start bg-sand px-3 py-2 text-[#1B1710]">{v.replyUs}</span>
+                <span class="text-xs text-muted">{v.replyNote}</span>
+              </div>
+            )}
+
+            {m.visual === 'qualify' && (
+              <>
+                <div class="flex flex-wrap gap-2">{v.chips.map((c) => <span class="border border-line-strong px-3.5 py-1.5 text-[13px]">{c}</span>)}</div>
+                <div class="mt-2 flex items-center gap-2.5"><span class="text-xs text-muted">{v.score}</span><span class="bg-gold px-2.5 py-0.5 text-xs font-semibold text-ink">{v.hot}</span></div>
+              </>
+            )}
+
+            {m.visual === 'record' && (
+              <div>{v.record.map(([a, b]) => (
+                <div class="flex justify-between gap-3 border-t border-line py-2.5 text-sm"><span class="text-muted">{a}</span><span>{b}</span></div>
+              ))}</div>
+            )}
+
+            {m.visual === 'calendar' && (
+              <>
+                <div class="flex gap-1.5">{v.days.map((day, di) => (
+                  <div class="flex min-w-0 flex-1 flex-col gap-1.5">
+                    <span class="truncate text-center text-[11px] text-muted">{day}</span>
+                    {[0, 1, 2].map((j) => <span class:list={['h-5.5', di === 4 && j === 1 ? 'bg-gold' : 'bg-[#1E1B15]']}></span>)}
+                  </div>
+                ))}</div>
+                <span class="text-[13px] text-sand">{v.booked}</span>
+              </>
+            )}
+
+            {m.visual === 'report' && (
+              <>
+                <div class="flex h-28 items-end gap-2.5">{v.bars.map((label, bi) => (
+                  <div class="flex flex-1 flex-col items-center justify-end gap-1.5">
+                    <span class:list={['w-full', bi === 0 ? 'bg-gold' : 'bg-[#2A251C]']} style={`height:${bars[bi]}px`}></span>
+                    <span class="text-[11px] text-muted">{label}</span>
+                  </div>
+                ))}</div>
+                <span class="text-[11px] text-muted">{v.example}</span>
+              </>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CallToAction lang={lang} />
+</Base>

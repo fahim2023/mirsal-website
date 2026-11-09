@@ -1,0 +1,62 @@
+---
+// The phone showing a WhatsApp conversation. Visitors can switch the demo between English and Arabic.
+// Both conversations are rendered; a tiny script shows one and hides the other.
+import { chats } from '../i18n/chat';
+import { t, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+<div class="chat-demo flex flex-col items-center gap-5" data-initial={lang}>
+  <div role="group" aria-label={d.chat.toggleLabel} class="inline-flex border border-line-strong">
+    <button type="button" data-chat-lang="en" class="min-h-10 px-4 text-xs tracking-[0.18em]">EN</button>
+    <button type="button" data-chat-lang="ar" class="min-h-10 px-4 text-sm" style="font-family:'IBM Plex Sans Arabic',sans-serif">عربي</button>
+  </div>
+
+  <div class="w-[300px] max-w-full rounded-[44px] border border-line-strong bg-[#050504] p-2.5 shadow-[0_40px_100px_rgba(0,0,0,0.7)]">
+    <div class="flex h-[560px] flex-col overflow-hidden rounded-[35px] bg-[#F4EEE3]">
+      <div class="flex items-center gap-2.5 bg-[#14110B] px-4 pt-5.5 pb-3">
+        <span aria-hidden="true" class="flex h-8.5 w-8.5 items-center justify-center rounded-full border border-gold font-display text-[15px] text-gold">RE</span>
+        <span class="flex flex-col leading-tight"><span class="text-sm font-semibold text-cream">{d.chat.clientName}</span><span class="text-[11px] text-gold">{d.chat.online}</span></span>
+      </div>
+      {(['en', 'ar'] as const).map((l) => (
+        <div data-chat={l} dir={l === 'ar' ? 'rtl' : 'ltr'} lang={l} hidden={l !== lang}
+          class="flex flex-1 flex-col gap-2 px-3 py-3.5 text-[13px] leading-normal text-[#1B1710]"
+          style={l === 'ar' ? "font-family:'IBM Plex Sans Arabic',sans-serif" : "font-family:Manrope,sans-serif"}>
+          {chats[l].map((m) =>
+            m.buttons ? (
+              <div class="flex flex-wrap gap-1.5 self-start">
+                {m.buttons.map((b) => <span class="rounded-full border border-[#B8944F] bg-[#FFFDF8] px-3 py-1 text-xs font-semibold text-[#6E5524]">{b}</span>)}
+              </div>
+            ) : (
+              <div class:list={['max-w-[84%] px-3 py-2 whitespace-pre-line', m.from === 'client' ? 'self-end rounded-[12px_12px_3px_12px] bg-[#E3D6BC]' : 'self-start rounded-[12px_12px_12px_3px] bg-white']}>
+                {m.text}
+                <span class="mt-0.5 block text-end text-[10px] text-[#6E6450]">{m.time}</span>
+              </div>
+            )
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Switches the demo conversation language and highlights the active button.
+  document.querySelectorAll<HTMLElement>('.chat-demo').forEach((root) => {
+    const show = (l: string) => {
+      root.querySelectorAll<HTMLElement>('[data-chat]').forEach((el) => (el.hidden = el.dataset.chat !== l));
+      root.querySelectorAll<HTMLButtonElement>('[data-chat-lang]').forEach((b) => {
+        const on = b.dataset.chatLang === l;
+        b.setAttribute('aria-pressed', String(on));
+        b.classList.toggle('bg-gold', on);
+        b.classList.toggle('text-ink', on);
+        b.classList.toggle('text-cream', !on);
+      });
+    };
+    root.querySelectorAll<HTMLButtonElement>('[data-chat-lang]').forEach((b) =>
+      b.addEventListener('click', () => show(b.dataset.chatLang!))
+    );
+    show(root.dataset.initial || 'en');
+  });
+</script>

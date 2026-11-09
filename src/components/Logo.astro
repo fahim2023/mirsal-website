@@ -1,0 +1,21 @@
+---
+// Full logo: mark + "MIRSAL" + "مرسال". The order of the two words flips in Arabic.
+import Mark from './Mark.astro';
+import type { Lang } from '../i18n';
+interface Props { lang: Lang; size?: number }
+const { lang, size = 20 } = Astro.props;
+---
+<span class="flex items-center gap-3">
+  <Mark size={Math.round(size * 1.7)} />
+  {lang === 'ar' ? (
+    <span class="flex flex-col leading-[1.1]">
+      <span class="text-cream" style={`font-family:'El Messiri',serif;font-size:${size + 4}px`}>مرسال</span>
+      <span class="text-gold" style={`font-family:'Cormorant Garamond',serif;font-size:${Math.round(size * 0.5)}px;letter-spacing:0.32em`}>MIRSAL</span>
+    </span>
+  ) : (
+    <span class="flex flex-col leading-[1.05]">
+      <span class="font-medium text-cream" style={`font-family:'Cormorant Garamond',serif;font-size:${size}px;letter-spacing:0.3em`}>MIRSAL</span>
+      <span class="text-gold" style={`font-family:'El Messiri',serif;font-size:${Math.round(size * 0.62)}px`}>مرسال</span>
+    </span>
+  )}
+</span>

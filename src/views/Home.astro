@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import Photo from '../components/Photo.astro';
+import Section from '../components/Section.astro';
+import ChatDemo from '../components/ChatDemo.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Star from '../components/Star.astro';
+import { t, link, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const h = d.home;
+const numerals = lang === 'ar' ? ['١', '٢', '٣', '٤', '٥', '٦'] : ['I', 'II', 'III', 'IV', 'V', 'VI'];
+const h2 = 'm-0 font-display text-[clamp(36px,4.6vw,64px)] leading-[1.08] font-normal rtl:leading-[1.45] rtl:font-medium';
+---
+<Base lang={lang} page="" title={h.title}>
+  <!-- HERO -->
+  <section class="px-5 pt-14 pb-24 sm:px-10 md:pt-28 md:pb-32 lg:px-16">
+    <div class="mx-auto flex max-w-[1280px] flex-wrap items-center gap-x-18 gap-y-16">
+      <div class="flex min-w-0 flex-[6_1_520px] flex-col gap-7.5">
+        <Eyebrow text={h.kicker} />
+        <h1 class="m-0 font-display text-[clamp(46px,6.4vw,96px)] leading-[1.02] font-normal rtl:leading-[1.4] rtl:font-medium">{h.h1}</h1>
+        <p class="m-0 max-w-[32em] text-[clamp(17px,1.5vw,19px)] text-muted">{h.text}</p>
+        <div class="flex flex-wrap gap-3.5">
+          <Button href={link(lang, 'contact')}>{h.cta1}</Button>
+          <Button href="#experience" variant="ghost">{h.cta2}</Button>
+        </div>
+        <ul class="m-0 mt-2 flex list-none flex-wrap gap-x-7 gap-y-2.5 p-0 text-[13px] text-muted">
+          {h.points.map((p) => (
+            <li class="inline-flex items-center gap-2.5"><span aria-hidden="true" class="h-1.5 w-1.5 rotate-45 bg-gold"></span><span set:html={p} /></li>
+          ))}
+        </ul>
+      </div>
+      <div class="relative min-w-0 flex-[5_1_380px]">
+        <Photo name="villa" lang={lang} ratio="4 / 5" arch eager class="border-line-strong" sizes="(min-width: 1024px) 40vw, 100vw" />
+        <div class="absolute -bottom-9 -start-4 flex w-[230px] flex-col gap-1 border border-line-strong bg-panel px-5 py-4.5 shadow-[0_30px_70px_rgba(0,0,0,0.6)] sm:-start-7">
+          <span class="caps text-[11px] text-gold rtl:text-sm">{h.card.label}</span>
+          <span class="font-display text-[22px] leading-snug">{h.card.value}</span>
+          <span class="text-xs text-muted">{h.card.sub}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FIRST REPLY WINS -->
+  <Section>
+    <Eyebrow text={h.first.eyebrow} center />
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,340px),1fr))] gap-px border border-line bg-line">
+      <div class="flex flex-col items-center gap-2.5 bg-ink p-8 text-center md:p-13">
+        <span class="caps text-xs text-muted rtl:text-sm">{h.first.before.label}</span>
+        <span class="font-display text-[clamp(72px,9vw,128px)] leading-none text-[#6F6656]">{h.first.before.time}</span>
+        <span class="text-muted">{h.first.before.sub}</span>
+      </div>
+      <div class="flex flex-col items-center gap-2.5 bg-panel p-8 text-center md:p-13">
+        <span class="caps text-xs text-gold rtl:text-sm">{h.first.after.label}</span>
+        <span class="font-display text-[clamp(72px,9vw,128px)] leading-none text-gold">{h.first.after.time}</span>
+        <span class="text-sand">{h.first.after.sub}</span>
+      </div>
+    </div>
+    <p class="m-0 mx-auto max-w-[36em] text-center font-display text-[clamp(22px,2.2vw,30px)] leading-normal text-sand italic rtl:not-italic">{h.first.quote}</p>
+  </Section>
+
+  <!-- THE EXPERIENCE -->
+  <Section id="experience" panel>
+    <div class="flex flex-col items-center gap-4.5 text-center">
+      <Eyebrow text={h.experience.eyebrow} center />
+      <h2 class={h2}>{h.experience.title}</h2>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-x-20 gap-y-14">
+      <ChatDemo lang={lang} />
+      <ol class="m-0 max-w-[520px] flex-[1_1_380px] list-none p-0">
+        {h.experience.steps.map((s, i) => (
+          <li class="flex gap-5 border-t border-line py-4.5">
+            <span class="w-8.5 shrink-0 font-display text-[26px] leading-none text-gold">{numerals[i]}</span>
+            <span><strong class="block font-semibold">{s.t}</strong><span class="text-[15px] text-muted">{s.d}</span></span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
+
+  <!-- WHAT WE PROVIDE -->
+  <Section>
+    <div class="flex flex-wrap items-start gap-x-18 gap-y-12">
+      <div class="flex flex-[1_1_320px] flex-col gap-6 lg:sticky lg:top-28">
+        <Eyebrow text={h.included.eyebrow} />
+        <h2 class="m-0 font-display text-[clamp(32px,3.6vw,48px)] leading-[1.1] font-normal rtl:leading-[1.45] rtl:font-medium">{h.included.title}</h2>
+        <p class="m-0 text-muted">{h.included.text}</p>
+        <Photo name="interior" lang={lang} ratio="4 / 3" sizes="(min-width: 1024px) 30vw, 100vw" />
+      </div>
+      <div class="flex flex-[1.3_1_420px] flex-col">
+        {h.included.items.map((it, i) => (
+          <div class="flex items-baseline gap-6 border-t border-line py-6.5">
+            <span class="w-7 shrink-0 text-xs text-gold">{String(i + 1).padStart(2, '0')}</span>
+            <div class="flex flex-col gap-1.5">
+              <h3 class="m-0 font-display text-[26px] leading-snug font-medium">{it.t}</h3>
+              <p class="m-0 text-muted">{it.d}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <!-- ENGAGEMENT TEASER -->
+  <Section panel>
+    <div class="flex flex-col items-center gap-4.5 text-center">
+      <Eyebrow text={h.engagement.eyebrow} center />
+      <h2 class={h2}>{h.engagement.title}</h2>
+      <p class="m-0 max-w-[34em] text-muted">{h.engagement.text}</p>
+    </div>
+    <div class="relative mx-auto flex w-full max-w-[720px] flex-col gap-5.5 border border-line-strong bg-ink p-7 md:p-13">
+      <span aria-hidden="true" class="absolute -top-3 left-1/2 -translate-x-1/2 bg-ink px-3.5"><Star /></span>
+      <div class="flex flex-col items-center gap-1.5 text-center">
+        <span class="caps text-xs text-gold rtl:text-sm">{h.engagement.from}</span>
+        <span class="font-display text-[clamp(36px,4vw,52px)] leading-tight">{h.engagement.setup}</span>
+        <span class="text-muted">+ {h.engagement.monthly}</span>
+      </div>
+      <div>
+        {h.engagement.rows.map((r) => (
+          <div class="flex justify-between gap-4 border-t border-line py-3.5 text-[15px]"><span class="text-muted">{r.k}</span><span class="text-end">{r.v}</span></div>
+        ))}
+      </div>
+      <Button href={link(lang, 'contact')}>{h.cta1}</Button>
+      <a href={link(lang, 'engagement')} class="self-center text-sm text-muted">{h.engagement.more}</a>
+    </div>
+    <p class="m-0 text-center text-sm text-muted">{h.engagement.note}</p>
+  </Section>
+
+  <!-- FOUNDER -->
+  <Section>
+    <div class="flex flex-wrap items-center gap-x-18 gap-y-12">
+      <div class="flex-[0_1_300px]"><Photo name="arches" lang={lang} ratio="3 / 4" arch sizes="(min-width: 1024px) 300px, 100vw" /></div>
+      <div class="flex flex-[1_1_420px] flex-col gap-5.5">
+        <Eyebrow text={h.founder.eyebrow} />
+        <p class="m-0 font-display text-[clamp(24px,2.6vw,34px)] leading-[1.45]">{h.founder.quote}</p>
+        <p class="m-0 text-muted">{h.founder.text}</p>
+        <p class="m-0 flex flex-col"><span class="font-display text-[26px] text-gold">{h.founder.name}</span><span class="caps text-xs text-muted rtl:text-sm">{h.founder.role}</span></p>
+        <a href={link(lang, 'about')} class="self-start text-sm text-muted">{d.nav.about} {lang === 'ar' ? '←' : '→'}</a>
+      </div>
+    </div>
+  </Section>
+
+  <!-- FAQ: native <details>, so it works without JavaScript -->
+  <Section panel>
+    <div class="flex flex-col items-center gap-4.5 text-center">
+      <Eyebrow text={h.faq.eyebrow} center />
+      <h2 class={h2}>{h.faq.title}</h2>
+    </div>
+    <div class="mx-auto w-full max-w-[820px] border-t border-line">
+      {h.faq.items.map((f, i) => (
+        <details class="group border-b border-line" open={i === 0}>
+          <summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-5.5 font-display text-[23px] rtl:text-xl [&::-webkit-details-marker]:hidden">
+            <span>{f.q}</span>
+            <span aria-hidden="true" class="shrink-0 font-sans text-xl text-gold transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <p class="m-0 max-w-[40em] pb-6 text-muted">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <CallToAction lang={lang} />
+</Base>

@@ -1,0 +1,13 @@
+---
+// List with small gold diamonds.
+interface Props { items: string[]; class?: string }
+const { items, class: cls = '' } = Astro.props;
+---
+<ul class:list={['m-0 list-none p-0', cls]}>
+  {items.map((item) => (
+    <li class="flex items-baseline gap-3 py-1.5">
+      <span aria-hidden="true" class="h-1.5 w-1.5 shrink-0 -translate-y-0.5 rotate-45 bg-gold"></span>
+      <span set:html={item} />
+    </li>
+  ))}
+</ul>

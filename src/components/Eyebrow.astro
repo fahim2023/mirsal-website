@@ -1,0 +1,10 @@
+---
+// Small gold label with a line on each side, used above headings.
+interface Props { text: string; center?: boolean }
+const { text, center = false } = Astro.props;
+---
+<div class:list={['flex items-center gap-3.5', center ? 'justify-center' : 'justify-start']}>
+  <span class="h-px w-10 bg-gold"></span>
+  <span class="caps text-xs font-medium text-gold rtl:text-sm" set:html={text} />
+  <span class="h-px w-10 bg-gold"></span>
+</div>

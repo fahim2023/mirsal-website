@@ -1,0 +1,29 @@
+---
+// A responsive photograph with a soft dark-gold tint so every image matches the brand.
+import { photos, type PhotoKey, type Photo } from '../data/images';
+import type { Lang } from '../i18n';
+
+interface Props { name: PhotoKey; lang: Lang; ratio?: string; arch?: boolean; class?: string; eager?: boolean; sizes?: string }
+const { name, lang, ratio = '4 / 3', arch = false, class: cls = '', eager = false, sizes = '(min-width: 1024px) 50vw, 100vw' } = Astro.props;
+const p: Photo = photos[name];
+const isRemote = p.src.startsWith('http');
+// Unsplash resizes on the fly: ask for the width we need, in modern formats.
+const url = (w: number) => (isRemote ? `${p.src}?auto=format&fit=crop&w=${w}&q=75` : p.src);
+const srcset = isRemote ? [640, 960, 1280, 1800].map((w) => `${url(w)} ${w}w`).join(', ') : undefined;
+---
+<div class:list={['relative overflow-hidden border border-line bg-panel', arch && 'rounded-t-full', cls]} style={`aspect-ratio:${ratio}`}>
+  <img
+    src={url(1280)}
+    srcset={srcset}
+    sizes={sizes}
+    alt={p.alt[lang]}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : undefined}
+    decoding="async"
+    class="absolute inset-0 h-full w-full object-cover saturate-[0.85]"
+    style={p.position ? `object-position:${p.position}` : undefined}
+  />
+  <!-- Brand tint: warms the photo and darkens the edges so text and gold lines sit well on top -->
+  <span aria-hidden="true" class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(13,12,10,0)_45%,rgba(13,12,10,0.55)_100%)] mix-blend-multiply"></span>
+  <span aria-hidden="true" class="pointer-events-none absolute inset-0 bg-[#C8A15A]/10 mix-blend-soft-light"></span>
+</div>

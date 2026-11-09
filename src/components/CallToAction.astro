@@ -1,0 +1,23 @@
+---
+import Star from './Star.astro';
+import Button from './Button.astro';
+import { t, link, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+<section class="relative overflow-hidden border-t border-line px-5 py-24 sm:px-10 md:py-40 lg:px-16">
+  <svg aria-hidden="true" width="520" height="520" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.04"
+    class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gold opacity-50">
+    <rect x="5" y="5" width="14" height="14" /><rect x="5" y="5" width="14" height="14" transform="rotate(45 12 12)" /><circle cx="12" cy="12" r="9.9" />
+  </svg>
+  <div class="relative mx-auto flex max-w-[820px] flex-col items-center gap-6 text-center">
+    <Star />
+    <h2 class="m-0 font-display text-[clamp(40px,5.4vw,76px)] leading-[1.05] font-normal rtl:leading-[1.45] rtl:font-medium">{d.cta.title}</h2>
+    <p class="m-0 max-w-[32em] text-lg text-muted">{d.cta.text}</p>
+    <div class="flex flex-wrap justify-center gap-3.5">
+      <Button href={link(lang, 'contact')}>{d.cta.primary}</Button>
+      <Button href={d.contactInfo.whatsappLink} variant="ghost">{d.cta.whatsapp}</Button>
+    </div>
+  </div>
+</section>

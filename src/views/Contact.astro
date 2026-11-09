@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { t, link, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const c = d.contact;
+const f = c.fields;
+// Where the form is sent. Set PUBLIC_FORM_ENDPOINT in a .env file (e.g. your n8n webhook URL).
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+const input = 'w-full min-h-11.5 border-0 border-b border-line-strong bg-transparent px-0 py-2.5 text-base text-cream outline-none focus:border-gold';
+const label = 'caps text-xs text-muted rtl:text-sm';
+---
+<Base lang={lang} page="contact" title={c.title}>
+  <PageHero eyebrow={c.eyebrow} title={c.h1} text={c.text} />
+
+  <section class="px-5 pb-24 sm:px-10 md:pb-32 lg:px-16">
+    <div class="mx-auto flex max-w-[1180px] flex-wrap items-start gap-10">
+      <form id="consultation-form" method="post" action={endpoint || link(lang, 'thanks')}
+        data-endpoint={endpoint} data-thanks={link(lang, 'thanks')}
+        class="grid flex-[1.5_1_520px] grid-cols-[repeat(auto-fit,minmax(min(100%,240px),1fr))] gap-x-9 gap-y-7 border border-line-strong p-7 md:p-13">
+        <input type="hidden" name="language" value={lang} />
+        <!-- Honeypot: hidden from people, bots fill it in, and we ignore those submissions -->
+        <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+
+        <div class="flex flex-col gap-2"><label for="c-name" class={label}>{f.name}</label><input id="c-name" name="name" required autocomplete="name" placeholder={f.namePh} class={input} /></div>
+        <div class="flex flex-col gap-2"><label for="c-agency" class={label}>{f.agency}</label><input id="c-agency" name="agency" required autocomplete="organization" placeholder={f.agencyPh} class={input} /></div>
+        <div class="flex flex-col gap-2"><label for="c-role" class={label}>{f.role}</label>
+          <select id="c-role" name="role" class={`${input} bg-ink`}>{f.roles.map((o) => <option>{o}</option>)}</select></div>
+        <div class="flex flex-col gap-2"><label for="c-city" class={label}>{f.city}</label>
+          <select id="c-city" name="city" class={`${input} bg-ink`}>{f.cities.map((o) => <option>{o}</option>)}</select></div>
+        <div class="flex flex-col gap-2"><label for="c-wa" class={label}>{f.whatsapp}</label><input id="c-wa" name="whatsapp" type="tel" required autocomplete="tel" dir="ltr" placeholder={f.whatsappPh} class:list={[input, 'rtl:text-end']} /></div>
+        <div class="flex flex-col gap-2"><label for="c-email" class={label}>{f.email}</label><input id="c-email" name="email" type="email" autocomplete="email" dir="ltr" placeholder={f.emailPh} class:list={[input, 'rtl:text-end']} /></div>
+        <div class="flex flex-col gap-2"><label for="c-leads" class={label}>{f.leads}</label>
+          <select id="c-leads" name="monthly_enquiries" class={`${input} bg-ink`}>{f.leadOptions.map((o) => <option>{o}</option>)}</select></div>
+        <div class="flex flex-col gap-2"><label for="c-lang" class={label}>{f.language}</label>
+          <select id="c-lang" name="preferred_language" class={`${input} bg-ink`}>{f.languages.map((o) => <option>{o}</option>)}</select></div>
+        <div class="col-span-full flex flex-col gap-2"><label for="c-msg" class={label}>{f.message}</label><textarea id="c-msg" name="message" rows="3" placeholder={f.messagePh} class={`${input} resize-y`}></textarea></div>
+
+        <label class="col-span-full flex cursor-pointer items-start gap-3 text-sm text-muted">
+          <input type="checkbox" name="consent" required class="mt-1 h-4.5 w-4.5 shrink-0 accent-gold" />
+          <span>{f.consentBefore} <a href={link(lang, 'privacy')}>{f.consentLink}</a>.</span>
+        </label>
+
+        <p id="form-error" role="alert" hidden class="col-span-full m-0 border border-[#E07A5F] px-4 py-3 text-sm text-[#F2B8A6]">{f.error}</p>
+
+        <button type="submit" data-sending={f.sending}
+          class="caps col-span-full min-h-13 cursor-pointer bg-gold px-7 py-4 text-[13px] font-semibold text-ink hover:bg-sand rtl:text-base">{f.submit}</button>
+      </form>
+
+      <aside class="flex flex-[1_1_320px] flex-col gap-7">
+        <div class="flex flex-col gap-3 border border-line-strong bg-panel p-6.5">
+          <span class="caps text-[11px] text-gold rtl:text-sm">{c.side.talkLabel}</span>
+          <a href={d.contactInfo.whatsappLink} class="font-display text-[28px] no-underline">{c.side.talkLink}</a>
+          <span class="text-[15px] text-muted"><span dir="ltr">{d.contactInfo.whatsappNumber}</span> · {c.side.talkHours}</span>
+        </div>
+        <div class="flex flex-col gap-3 border border-line-strong bg-panel p-6.5">
+          <span class="caps text-[11px] text-gold rtl:text-sm">{c.side.emailLabel}</span>
+          <a href={`mailto:${d.contactInfo.email}`} class="text-lg">{d.contactInfo.email}</a>
+        </div>
+        <div class="flex flex-col gap-3 border border-line-strong bg-panel p-6.5">
+          <span class="caps text-[11px] text-gold rtl:text-sm">{c.side.nextLabel}</span>
+          <ol class="m-0 flex flex-col gap-2 ps-4.5 text-muted">{c.side.next.map((n) => <li>{n}</li>)}</ol>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Sends the form in the background as JSON, then shows the thank-you page.
+  // Without an endpoint (e.g. while developing) it goes straight to the thank-you page.
+  const form = document.getElementById('consultation-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const endpoint = form.dataset.endpoint;
+    const thanks = form.dataset.thanks!;
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (data.company_website) return; // honeypot filled: ignore bots
+    if (!endpoint) { window.location.href = thanks; return; }
+
+    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const original = button.textContent;
+    button.disabled = true;
+    button.textContent = button.dataset.sending ?? '…';
+    try {
+      const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      if (!res.ok) throw new Error(String(res.status));
+      window.location.href = thanks;
+    } catch {
+      (document.getElementById('form-error') as HTMLElement).hidden = false;
+      button.disabled = false;
+      button.textContent = original;
+    }
+  });
+</script>

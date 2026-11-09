@@ -1,0 +1,10 @@
+---
+// Standard full-width section with the hairline at the top.
+interface Props { id?: string; panel?: boolean; class?: string; inner?: string }
+const { id, panel = false, class: cls = '', inner = '' } = Astro.props;
+---
+<section id={id} class:list={['border-t border-line px-5 py-20 sm:px-10 md:py-32 lg:px-16', panel && 'bg-panel', cls]}>
+  <div class:list={['mx-auto flex max-w-[1180px] flex-col gap-14', inner]}>
+    <slot />
+  </div>
+</section>

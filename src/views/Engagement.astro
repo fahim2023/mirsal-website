@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Bullets from '../components/Bullets.astro';
+import Button from '../components/Button.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { t, link, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const e = t(lang).engagement;
+---
+<Base lang={lang} page="engagement" title={e.title}>
+  <PageHero eyebrow={e.eyebrow} title={e.h1} text={e.text} />
+
+  <!-- Tiers -->
+  <section class="px-5 pb-24 sm:px-10 md:pb-32 lg:px-16">
+    <div class="mx-auto flex max-w-[1180px] flex-wrap gap-6">
+      {e.tiers.map((tier) => (
+        <div class:list={['relative flex flex-[1_1_380px] flex-col gap-5.5 p-7 md:p-11', tier.featured ? 'border border-gold bg-panel' : 'border border-line-strong']}>
+          {tier.featured && <span class="caps absolute -top-3 start-8 bg-ink px-3 text-[11px] text-gold rtl:text-sm">{e.featuredBadge}</span>}
+          <div class="flex flex-col gap-1">
+            <h2 class="m-0 font-display text-[40px] leading-tight font-normal rtl:font-medium">{tier.name}</h2>
+            <span class="text-muted">{tier.sub}</span>
+          </div>
+          <div class="flex flex-col gap-0.5">
+            <span class="caps text-[11px] text-gold rtl:text-sm">{tier.priceLabel}</span>
+            <span class="font-display text-[40px] leading-tight">{tier.price}</span>
+            {tier.monthly && <span class="text-muted">{tier.monthly}</span>}
+          </div>
+          <div>
+            {tier.rows.map(([k, val]) => (
+              <div class="flex justify-between gap-4 border-t border-line py-3 text-[15px]"><span class="text-muted">{k}</span><span class="text-end" set:html={val} /></div>
+            ))}
+          </div>
+          <Button href={link(lang, 'contact')} variant={tier.featured ? 'primary' : 'ghost'} class="mt-auto">{e.button}</Button>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <Section panel>
+    <div class="flex flex-wrap gap-x-16 gap-y-10">
+      <div class="flex flex-[1_1_320px] flex-col gap-4">
+        <span class="caps text-[11px] text-gold rtl:text-sm">{e.setupTitle}</span>
+        <Bullets items={e.setup} class="text-[17px]" />
+      </div>
+      <div class="flex flex-[1_1_320px] flex-col gap-4">
+        <span class="caps text-[11px] text-gold rtl:text-sm">{e.monthlyTitle}</span>
+        <Bullets items={e.monthlyItems} class="text-[17px]" />
+      </div>
+    </div>
+  </Section>
+
+  <!-- Paid directly -->
+  <Section>
+    <div class="flex flex-wrap gap-x-18 gap-y-10">
+      <div class="flex flex-[1_1_320px] flex-col gap-5">
+        <Eyebrow text={e.paidEyebrow} />
+        <h2 class="m-0 font-display text-[clamp(30px,3.4vw,46px)] leading-[1.1] font-normal rtl:leading-[1.45] rtl:font-medium">{e.paidTitle}</h2>
+        <p class="m-0 text-muted">{e.paidText}</p>
+      </div>
+      <div class="flex-[1.3_1_420px]">
+        {e.paid.map((p) => (
+          <div class="flex flex-col gap-1 border-t border-line py-5">
+            <h3 class="m-0 font-display text-2xl font-medium">{p.t}</h3>
+            <span class="text-muted">{p.d}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <p class="m-0 text-sm text-muted">{e.terms}</p>
+  </Section>
+
+  <CallToAction lang={lang} />
+</Base>

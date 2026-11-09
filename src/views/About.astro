@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Photo from '../components/Photo.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const a = t(lang).about;
+const numerals = lang === 'ar' ? ['١', '٢', '٣'] : ['I', 'II', 'III'];
+---
+<Base lang={lang} page="about" title={a.title}>
+  <PageHero eyebrow={a.eyebrow} title={a.h1} text={a.text} />
+
+  <Section>
+    <div class="flex flex-wrap items-center gap-x-18 gap-y-12">
+      <div class="flex-[1_1_340px]"><Photo name="arches" lang={lang} ratio="4 / 5" arch sizes="(min-width: 1024px) 40vw, 100vw" /></div>
+      <div class="flex flex-[1.2_1_420px] flex-col gap-5.5">
+        <Eyebrow text={a.founderEyebrow} />
+        <p class="m-0 font-display text-[clamp(26px,2.6vw,36px)] leading-[1.4]">{a.quote}</p>
+        <p class="m-0 text-[17px] text-muted">{a.p1}</p>
+        <p class="m-0 text-[17px] text-muted">{a.p2}</p>
+        <p class="m-0 flex flex-col"><span class="font-display text-[28px] text-gold">{a.name}</span><span class="caps text-xs text-muted rtl:text-sm">{a.role}</span></p>
+      </div>
+    </div>
+  </Section>
+
+  <Section panel>
+    <div class="flex flex-col items-center gap-4.5 text-center">
+      <Eyebrow text={a.principlesEyebrow} center />
+      <h2 class="m-0 font-display text-[clamp(32px,4vw,56px)] leading-[1.08] font-normal rtl:leading-[1.45] rtl:font-medium">{a.principlesTitle}</h2>
+    </div>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-px border border-line bg-line">
+      {a.principles.map((p, i) => (
+        <div class="flex flex-col gap-3.5 bg-ink px-8 py-10">
+          <span class="font-display text-[44px] leading-none text-gold">{numerals[i]}</span>
+          <h3 class="m-0 font-display text-[30px] font-medium">{p.t}</h3>
+          <p class="m-0 text-muted">{p.d}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section>
+    <div class="flex flex-wrap items-center gap-x-18 gap-y-8">
+      <h2 class="m-0 flex-[1_1_360px] font-display text-[clamp(32px,4vw,52px)] leading-[1.1] font-normal rtl:leading-[1.45] rtl:font-medium">{a.bridgeTitle}</h2>
+      <p class="m-0 flex-[1_1_420px] text-[17px] text-muted">{a.bridgeText}</p>
+    </div>
+  </Section>
+
+  <CallToAction lang={lang} />
+</Base>
